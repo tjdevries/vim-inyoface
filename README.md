@@ -19,7 +19,7 @@ Comments that are in your face!
 You can make a mapping like:
 
 ```vim
-nmap <leader>c <Plug>(InYoFace_Toggle)<CR>
+nmap <leader>c <Plug>(InYoFace_Toggle)
 ```
 
 ### Credits
