@@ -21,3 +21,7 @@ You can make a mapping like:
 ```vim
 nmap <leader>c <Plug>(InYoFace_Toggle)<CR>
 ```
+
+### Credits
+
+Thanks to @tweekmonster for basically writing the whole thing. He just didn't want those sweet github stars like I do.
