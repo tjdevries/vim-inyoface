@@ -31,6 +31,17 @@ function! inyoface#set_brightness_diff(num) abort
   let s:brightness_diff = a:num
 endfunction
 
+function! inyoface#get_search_string(comment_string) abort
+    try
+      let l:comment_str = split(escape(a:comment_string, '^$.*/"'''), '%s')[0]
+    catch
+      " Don't try and do anything if we can't get the comment string
+      return
+    endtry
+
+    return '^\%(\s*' . l:comment_str . '\)\@!.*'
+endfunction
+
 function! inyoface#toggle_comments() abort
   if exists('w:toggle_comments')
     " If you've got colorpal, let's do some cool Comment helping
@@ -42,12 +53,16 @@ function! inyoface#toggle_comments() abort
     " If you've got colorpal, let's do some cool Comment helping
     call s:change_the_brightness('bright')
 
-    try
-      let l:comment_str = split(escape(&commentstring, '^$.*/"'''), '%s')[0]
-    catch
-      let l:comment_str = ''
-    endtry
+    let w:toggle_comments = matchadd('NonComment', inyoface#get_search_string(&commentstring))
 
-    let w:toggle_comments = matchadd('NonComment', '^\%(\s*' . l:comment_str . '\)\@!.*')
+    " Testing
+    " let w:toggle_comments = matchadd('NonComment', '^\%(\s*' . l:comment_str . '\)\@![^' . l:comment_str . ']*')
+    " let g:split_comment = split(escape(&commentstring, '^$.*/"'''), '%s')[0]
+    " execute '/^\%(\s*' . g:split_comment . '\)\@!.*\ze\%[' . g:split_comment . ']'
+    " execute '/^\%(\s*' . g:split_comment . '\)\@!.*\ze' . g:split_comment
+    " execute '/^\%(\s*' . g:split_comment . '\)\@!.*\(' . g:split_comment . '\)\@!'
+    " execute '/^\%(\s*#\)\@!.*\ze#'
+    " execute '/^\(\s*#\)\@!\(#\)\@!$'
+    " echo split(escape(&commentstring, '^$.*/"'''), '%s')[0]
   endif
 endfunction

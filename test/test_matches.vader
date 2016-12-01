@@ -1,0 +1,25 @@
+Before (Set some variables):
+  let g:python_comment_str = '# %s'
+  let g:viml_comment_str = '"%s'
+
+
+Execute (Test easy python comments):
+  AssertEqual '', matchstr('# this is a python comment', inyoface#get_search_string(g:python_comment_str))
+  AssertEqual '', matchstr('    # whitespace before comment', inyoface#get_search_string(g:python_comment_str))
+
+Execute (Test easy python non comments):
+  AssertEqual 'def this_function():', matchstr('def this_function():', inyoface#get_search_string(g:python_comment_str))
+
+Execute (Test viml comments):
+  AssertEqual '', matchstr('" This is a viml comment', inyoface#get_search_string(g:viml_comment_str))
+  AssertEqual '', matchstr('   " This is a viml comment with space', inyoface#get_search_string(g:viml_comment_str))
+
+Execute (Test viml non comments):
+  AssertEqual 'function! test()', matchstr('function! test()', inyoface#get_search_string(g:viml_comment_str))
+  AssertEqual 'let g:my_var = "hello"', matchstr('let g:my_var = "hello"', inyoface#get_search_string(g:viml_comment_str))
+
+Execute (Test python comments on end of line):
+  Log 'TODO'
+  " AssertEqual 'def this_function():  ', matchstr('def this_function():  # A comment here', 
+  "     \ inyoface#get_search_string(g:python_comment_str))
+
