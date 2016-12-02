@@ -1,9 +1,10 @@
-let s:brightness_changed = get(s:, 'brightness_changed', 0)
-let s:brightness_diff = get(s:, 'brightness_diff', 0)
+let s:brightness_changed = get(s:, 'brightness_changed', 0)     " Current amount of brightness changed
+let s:brightness_diff = get(s:, 'brightness_diff', 0)           " Brightness difference per change
+let s:brightness_diff = 5
 
 function! s:change_the_brightness(change) abort
   if !exists('g:colorpal_palette')
-    return
+
   endif
 
   if a:change ==? 'dark'
@@ -41,6 +42,10 @@ function! inyoface#get_search_string(comment_string) abort
 
     return '^\%(\s*' . l:comment_str . '\)\@!.*'
 endfunction
+
+" function! inyoface#get_complete_search_string(comment_string) abort
+"   sO:" -,mO:"  ,eO:"",:"
+" endfunction
 
 function! inyoface#toggle_comments() abort
   if exists('w:toggle_comments')

@@ -23,3 +23,5 @@ Execute (Test python comments on end of line):
   " AssertEqual 'def this_function():  ', matchstr('def this_function():  # A comment here', 
   "     \ inyoface#get_search_string(g:python_comment_str))
 
+Execute (Testing with the comments, not comment string):
+  Log 'TODO'
