@@ -4,7 +4,7 @@ let s:brightness_diff = 5
 
 function! s:change_the_brightness(change) abort
   if !exists('g:colorpal_palette')
-
+    return
   endif
 
   if a:change ==? 'dark'
